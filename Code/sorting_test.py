@@ -16,6 +16,8 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([3, 3]) is True  # Duplicate items are in order
         assert is_sorted([3, 5]) is True
         assert is_sorted([3, 5, 7]) is True
+        assert is_sorted([3, 5, 7, 7]) is True
+        assert is_sorted([3, 5, 7, 7, 10]) is True
         # TODO: Write more positive test cases with assert is True statements
         # You'll need a lot more than this to test sorting algorithm robustness
         # ...
@@ -215,7 +217,7 @@ def get_sort_function():
 
 
 # If using PyTest, change this variable to the sort function you want to test
-sort = bubble_sort
+sort = insertion_sort
 
 
 if __name__ == '__main__':
