@@ -1,5 +1,5 @@
 from sorting_iterative import bubble_sort, insertion_sort
-
+from random import randint
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -29,6 +29,25 @@ def merge(items1, items2):
                 result_list.append(items2[i])
 
             return result_list
+
+
+def in_place_merge(items, lowest_range, highest_range):
+    left_index = lowest_range[0]
+    right_index = highest_range[0]
+
+    for i in range(lowest_range[0], highest_range[1] - 1):
+        # if either indices reach the end of their range
+
+        if items[right_index - 1] < items[left_index]:
+            items[right_index - 1], items[left_index] = items[left_index], items[right_index - 1]
+            left_index += 1
+
+        elif items[left_index] <= items[right_index]:
+            left_index += 1
+        else:
+            items[right_index], items[left_index] = items[left_index], items[right_index]
+            left_index += 1
+            right_index += 1
 
 
 def split_sort_merge(items):
@@ -62,23 +81,78 @@ def merge_sort(items):
         merge_sort(right_half)
         left_half = items[:middle_index]
         merge_sort(left_half)
+
         for index, item in enumerate(merge(right_half, left_half)):
             items[index] = item
 
 
-def partition(items, low, high):
+def first_partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
     `[low...high]` by choosing a pivot (TODO: Use the low as the pivot) from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
     pivot_item = items[low]
     swapped_index = low + 1
+
+    for i in range(low + 1, high):
+        if items[i] < pivot_item:
+            items[i], items[swapped_index] = items[swapped_index], items[i]
+            swapped_index += 1
+
+    items[low], items[swapped_index - 1] = items[swapped_index - 1], items[low]
+
+    return swapped_index - 1
+
+
+def last_partition(items, low, high):
+    """Return index `p` after in-place partitioning given items in range
+    `[low...high]` by choosing a pivot (TODO: Use the low as the pivot) from
+    that range, moving pivot into index `p`, items less than pivot into range
+    `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
+    TODO: Running time: ??? Why and under what conditions?
+    TODO: Memory usage: ??? Why and under what conditions?"""
+    pivot_item = items[high]
+    swapped_index = low
+
+    for i in range(low, high - 1):
+        if items[i] < pivot_item:
+            items[i], items[swapped_index] = items[swapped_index], items[i]
+            swapped_index += 1
+
+    items[low], items[swapped_index - 1] = items[swapped_index - 1], items[low]
+
+    return swapped_index - 1
+
+
+def middle_partition(items, low, high):
+    """Return index `p` after in-place partitioning given items in range
+    `[low...high]` by choosing a pivot (TODO: Use the low as the pivot) from
+    that range, moving pivot into index `p`, items less than pivot into range
+    `[low...p-1]`, and items greater than pivot into range `[p+1...high]`."""
+    middle_index = (low + high) // 2
+    
+    pivot_item = items[middle_index]
+    swapped_index = low + 1
+
+    for i in range(low + 1, high):
+        if items[i] < pivot_item:
+            items[i], items[swapped_index] = items[swapped_index], items[i]
+            swapped_index += 1
+
+    items[low], items[swapped_index - 1] = items[swapped_index - 1], items[low]
+
+    return swapped_index - 1
+
+
+def random_partition(items, low, high):
+    random_pivot_index = randint(low, high - 1)
+    pivot_item = items[random_pivot_index]
+    swapped_index = low + 1
+
+    # swapped initially
+    items[low], items[random_pivot_index] = items[random_pivot_index], items[low]
 
     for i in range(low + 1, high):
         if items[i] < pivot_item:
@@ -93,10 +167,8 @@ def partition(items, low, high):
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # Credit to github.com/SWHarrison for helping me understand this
+    TODO: Best case running time: ??? Why and under what conditions?"""
+
     if low is None and high is None:
         low = 0
         high = len(items)
@@ -104,15 +176,15 @@ def quick_sort(items, low=None, high=None):
     if (high - low) < 2:
         return
 
-    pivot_index = partition(items, low, high)
+    pivot_index = random_partition(items, low, high)
     quick_sort(items, pivot_index + 1, high)
     quick_sort(items, low, pivot_index)
 
 
 if __name__ == '__main__':
-    itemNumbers = [56, 1, 78, 12, 45, 13, 84, 11, 8, 14, 54, 42, 89, 35, 25, 66, 76]
+    itemNumbers = [56, 1, 78, 12, 45, 13, 84, 11]
     # merge_sort(itemNumbers)
     # print(itemNumbers)
 
-    quick_sort(itemNumbers)
+    merge_sort(itemNumbers)
     print(itemNumbers)

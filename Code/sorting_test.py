@@ -217,7 +217,7 @@ def get_sort_function():
 
 
 # If using PyTest, change this variable to the sort function you want to test
-sort = insertion_sort
+sort = quick_sort
 
 
 if __name__ == '__main__':

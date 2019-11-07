@@ -4,7 +4,7 @@
 def is_sorted(items, start_offset=None, range_end=None):
     """Return a boolean indicating whether given items are in sorted order.
     TODO: Running time: O(n) Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Memory usage: O(1) Why and under what conditions?"""
     if start_offset is None:
         start_offset = 0
 
@@ -41,7 +41,7 @@ def bubble_sort(items):
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    Worst Running time: O(n^2) Why and under what conditions?
+    Worst Running time: O(n^2)
     Runtime: O(n) if the array only has one out of place item
     Memory usage: O(1) Why and under what conditions?"""
     if len(items) <= 1:
