@@ -39,7 +39,7 @@ def autocomplete(prefix, structure, algorithm='linear_search'):
         return [word for word in structure if word.startswith(prefix)]
     elif algorithm == 'trie':
         # Search the trie structure for the prefix
-        return structure.search(prefix)
+        return structure.autocomplete(prefix)
 
 
 def main():
@@ -65,11 +65,11 @@ def main():
         start_time = time.time()
 
         # Set up autocomplete and mark the clock
-        structure = autocomplete_setup(vocabulary)
+        structure = autocomplete_setup(vocabulary, "trie")
         setup_time = time.time()
 
         # Run autocomplete and mark the clock
-        completions = autocomplete(prefix, structure)
+        completions = autocomplete(prefix, structure, "trie")
         end_time = time.time()
 
         print('Vocabulary size: {}'.format(len(vocabulary)))
