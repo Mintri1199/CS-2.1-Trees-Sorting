@@ -44,6 +44,7 @@ def autocomplete(prefix, structure, algorithm='linear_search'):
 
 def main():
     """Read command-line arguments and test autocomplete algorithms."""
+    # Open the given vocabulary and prefixes files
     if len(sys.argv) == 1:
         script = sys.argv[0]  # Get script file name
         print('Usage: {} prefix'.format(script))
@@ -88,13 +89,13 @@ def main():
         start_time = time.time()
 
         # Set up autocomplete and mark the clock
-        structure = autocomplete_setup(vocabulary)
+        structure = autocomplete_setup(vocabulary,'trie')
         setup_time = time.time()
 
         # Run autocomplete with each prefix
         num_completions = 0
         for prefix in prefixes:
-            completions = autocomplete(prefix, structure)
+            completions = autocomplete(prefix, structure, 'trie')
             num_completions += len(completions)
             # print('Completions of {}: {}'.format(prefix, ', '.join(completions)))
 
