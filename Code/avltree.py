@@ -1,6 +1,5 @@
 # Reusing Binary tree code to implement a self balancing tree
 
-
 class BinaryTreeNode(object):
 
     def __init__(self, data):
