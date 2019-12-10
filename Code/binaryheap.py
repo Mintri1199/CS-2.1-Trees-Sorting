@@ -140,6 +140,12 @@ class BinaryMinHeap(object):
         return (index << 1) + 2  # Shift left to multiply by 2
 
 
+def heap_sort(numbers):
+    heap = BinaryMinHeap(numbers)
+    for i in range(len(numbers)):
+        numbers[i] = heap.delete_min()
+
+
 def test_binary_min_heap():
     # Create a binary min heap of 7 items
     items = [9, 25, 86, 3, 29, 5, 55]

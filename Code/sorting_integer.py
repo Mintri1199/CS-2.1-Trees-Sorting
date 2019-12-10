@@ -109,7 +109,7 @@ def bucket_sort(numbers, num_buckets=10):
         elif num > max_num:
             max_num = num
 
-    buckets = [LinkedList() for x in range(num_buckets)]
+    buckets = [LinkedList() for _ in range(num_buckets)]
     divider = (max_num + 1) // num_buckets
     for num in numbers:
         bucket = buckets[num // divider]
