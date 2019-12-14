@@ -126,16 +126,12 @@ class PrefixTree:
         """Traverse this prefix tree with recursive depth-first traversal. (pre-order)
         Start at the given node and visit each node with the given function."""
 
-        # for child in node.children:
-        #     if child is not None:
-        #         if child.terminal:
-        #             visit(prefix + child.character)
+        for child in node.children:
+            if child is not None:
+                if child.terminal:
+                    visit(prefix + child.character)
 
-        #         self._traverse(child, prefix + child.character, visit)
-        """Traverse this prefix tree with recursive depth-first traversal.
-        Start at the given node with the given prefix representing its path in
-        this prefix tree and visit each node with the given visit function."""
-        # TODO
+                self._traverse(child, prefix + child.character, visit)
 
 
 def create_prefix_tree(strings):

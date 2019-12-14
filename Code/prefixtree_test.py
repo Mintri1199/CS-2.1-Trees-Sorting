@@ -1,5 +1,3 @@
-#!python3
-
 from prefixtree import PrefixTree, PrefixTreeNode
 import unittest
 
@@ -220,21 +218,21 @@ class PrefixTreeTest(unittest.TestCase):
         strings = ['abc', 'abd', 'a', 'xyz']
         tree = PrefixTree(strings)
         # Verify completions for all substrings
-        assert tree.complete('ABC') == ['ABC']
-        assert tree.complete('ABD') == ['ABD']
-        assert tree.complete('AB') == ['ABC', 'ABD']
-        assert tree.complete('BC') == []
-        assert tree.complete('BD') == []
-        assert tree.complete('A') == ['A', 'ABC', 'ABD']
-        assert tree.complete('B') == []
-        assert tree.complete('C') == []
-        assert tree.complete('D') == []
-        assert tree.complete('XYZ') == ['XYZ']
-        assert tree.complete('XY') == ['XYZ']
-        assert tree.complete('YZ') == []
-        assert tree.complete('X') == ['XYZ']
-        assert tree.complete('Y') == []
-        assert tree.complete('Z') == []
+        assert tree.complete('abc') == ['abc']
+        assert tree.complete('abd') == ['abd']
+        assert tree.complete('ab') == ['abc', 'abd']
+        assert tree.complete('bc') == []
+        assert tree.complete('bd') == []
+        assert tree.complete('a') == ['a', 'abc', 'abd']
+        assert tree.complete('b') == []
+        assert tree.complete('c') == []
+        assert tree.complete('d') == []
+        assert tree.complete('xyz') == ['xyz']
+        assert tree.complete('xy') == ['xyz']
+        assert tree.complete('yz') == []
+        assert tree.complete('x') == ['xyz']
+        assert tree.complete('y') == []
+        assert tree.complete('z') == []
 
     def test_strings(self):
         tree = PrefixTree()
