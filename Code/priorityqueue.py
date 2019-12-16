@@ -31,7 +31,7 @@ class PriorityQueue(object):
     def enqueue(self, item, priority):
         """Insert the given item into this priority queue in order according to
         the given priority."""
-        self.heap.items.insert((item, priority))
+        self.heap.insert((priority, item))
 
     def front(self):
         """Return the item at the front of this priority queue without removing
@@ -39,7 +39,7 @@ class PriorityQueue(object):
         if self.heap.is_empty():
             return None
 
-        return self.heap.get_min()
+        return self.heap.get_min()[1]
 
     def dequeue(self):
         """Remove and return the item at the front of this priority queue,
@@ -47,7 +47,7 @@ class PriorityQueue(object):
         if self.size() == 0:
             raise ValueError('Priority queue is empty and has no front item')
 
-        return self.heap.delete_min()
+        return self.heap.delete_min()[1]
 
     def push_pop(self, item, priority):
         """Remove and return the item at the front of this priority queue,
@@ -55,4 +55,38 @@ class PriorityQueue(object):
         This method is more efficient than calling dequeue and then enqueue."""
         if self.size() == 0:
             raise ValueError('Priority queue is empty and has no front item')
-        return self.heap.replace_min((item, priority))
+
+        return self.heap.replace_min((priority, item))
+
+
+# Tests provided and modified from SWHarrison
+def test_priority_queue():
+
+    pri_q = PriorityQueue()
+    items = ["Sam", "Suk", "Zurich", "Tom", "Alan", "Betsy", "Eirika", "Kevin", "Ali"]
+    priority = 0
+    for item in items:
+        print("adding ", item, "with priority ", priority)
+        pri_q.enqueue(item, priority)
+        print(pri_q.heap.items)
+        priority = (priority + 1) % 3
+
+    while pri_q.length() > 0:
+        print(pri_q.dequeue())
+
+    items = ["Sam", "Suk", "Zurich", "Tom", "Alan", "Betsy", "Eirika", "Kevin", "Ali"]
+    priority = 0
+    for item in items:
+        print("adding",item,"with priority",priority)
+        pri_q.enqueue(item, priority)
+        priority = (priority + 1)%3
+
+    print(pri_q.push_pop("Jackson", 4))
+    print(pri_q.heap.items)
+
+    while pri_q.length() > 0:
+        print(pri_q.dequeue())
+
+
+if __name__ == '__main__':
+    test_priority_queue()

@@ -72,6 +72,9 @@ def counting_sort(numbers):
     then looping over counts and copying that many numbers into output list.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+    if len(numbers) == 0:
+        return numbers
+
     min_num = numbers[0]
     max_num = numbers[0]
     # Find the range
@@ -81,7 +84,6 @@ def counting_sort(numbers):
         elif num > max_num:
             max_num = num
 
-    result_array = []
     array_size = [0] * (max_num - min_num + 1)
     for num in numbers:
         array_size[num - min_num] += 1
