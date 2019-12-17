@@ -56,7 +56,7 @@ class PriorityQueue(object):
         if self.size() == 0:
             raise ValueError('Priority queue is empty and has no front item')
 
-        return self.heap.replace_min((priority, item))
+        return self.heap.replace_min((priority, item))[1]
 
 
 # Tests provided and modified from SWHarrison
